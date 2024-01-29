@@ -3,7 +3,7 @@
 
 import os
 import argparse
-
+from re import match
 from time import time
 
 import pandas as pd
@@ -34,9 +34,10 @@ def main(params):
 
     df = next(df_iter)
 
-    # Parse to timestamp
-    df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-    df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+    # Parse all date time columns:
+    datecols = [x for x in df.columns if match('.*(datetime).*', x) ]
+    for col in datecols:
+        df[col] = pd.to_datetime(df[col])
 
     # make all headers lower case:
     
@@ -46,7 +47,7 @@ def main(params):
 
     df.head(n=0).to_sql(name=table_name, con=engine, if_exists='replace') # Create the table without any data
 
-    #df.to_sql(name=table_name, con=engine, if_exists='append') # insert new rows if the table exists
+    df.to_sql(name=table_name, con=engine, if_exists='append') # insert new rows if the table exists
 
 
     while True: 
@@ -55,9 +56,10 @@ def main(params):
             t_start = time()
             
             df = next(df_iter)
-
-            df.tpep_pickup_datetime = pd.to_datetime(df.tpep_pickup_datetime)
-            df.tpep_dropoff_datetime = pd.to_datetime(df.tpep_dropoff_datetime)
+            # Parse all date time columns:
+            datecols = [x for x in df.columns if match('.*(datetime).*', x) ]
+            for col in datecols:
+                df[col] = pd.to_datetime(df[col])
 
             # make all headers lower case:
             df.columns = df.columns.str.lower()
