@@ -22,25 +22,24 @@ LIMIT 5;
 -- Question 6
 -- For the passengers picked up in September 2019 in the zone name Astoria which was the drop off zone that had the largest tip? We want the name of the zone, not the id.
 
-SELECT gtt.tip_amount, z.zone, z.borough, gtt.lpep_pickup_datetime::DATE
+SELECT gtt.tip_amount, z.zone as pickup, z2.zone as dropoff
+FROM
+green_taxi_trips AS gtt 
 
-FROM 
+JOIN zones AS z
+ON 
+gtt.pulocationid = z.locationid
 
-green_taxi_trips AS gtt,
-zones AS z
+JOIN 
+zones AS z2
 
-WHERE 
---gtt.pulocationid = z.locationid 
-gtt.dolocationid = z.locationid 
-AND 
-EXTRACT('Year' FROM gtt.lpep_pickup_datetime ) = 2019 
-AND 
-EXTRACT('Month' FROM gtt.lpep_pickup_datetime ) = 9
+ON 
+gtt.dolocationid = z2.locationid
 AND
-z.zone ~* 'long isl'
+gtt.lpep_pickup_datetime BETWEEN '2019-01-01' AND '2019-12-31'
 
---GROUP BY z.zone
+AND z.zone ~* 'Astoria'
 
 ORDER BY gtt.tip_amount DESC
 
-LIMIT 15;
+limit 5;
