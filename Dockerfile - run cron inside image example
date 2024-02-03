@@ -1,0 +1,38 @@
+FROM rocker/tidyverse:latest
+
+# Install cron
+RUN apt-get update && apt-get install -y cron
+
+# Install R packages
+# If you install R packages from CRAN using the install2.r command, the temporary files are stored in /tmp/downloaded_packages directory. 
+# Therefore, it is recommended to delete /tmp/downloaded_packages at the end if you use this command in Dockerfiles.
+
+RUN install2.r --error \
+    googlesheets4 \
+    slackr \
+    && rm -rf /tmp/downloaded_packages
+# Set the working directory
+WORKDIR /app
+
+# Set timezone
+RUN apt-get install -y tzdata
+ENV TZ="Europe/Zurich"
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Copy the cron file to the container
+COPY cronfile /etc/cron.d/cronfile
+
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/cronfile
+# Base image https://hub.docker.com/u/oliverstatworx/
+ 
+# Copy script to be executed:
+COPY run.R /app/run.R
+# Give execution rights to the script
+RUN chmod 0744 /app/run.R
+
+# Apply the cron job
+RUN crontab /etc/cron.d/cronfile
+
+# Start the cron daemon in the foreground
+CMD ["cron", "-f"]

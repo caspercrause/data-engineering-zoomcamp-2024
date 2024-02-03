@@ -1,0 +1,1 @@
+* * * * * /usr/local/bin/Rscript /app/run.R >> /var/log/cron.log 2>&1
