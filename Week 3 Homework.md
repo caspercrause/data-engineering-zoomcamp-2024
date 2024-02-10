@@ -19,7 +19,9 @@ if 'test' not in globals():
 URLS = [
     f'https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2022-0{x}.parquet'
       if x < 10 
-      else f'https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2022-{x}.parquet' for x in range(1, 13)
+      else f'https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2022-{x}.parquet'
+      
+      for x in range(1, 13)
     ]
 
 @data_loader
@@ -75,6 +77,40 @@ def test_output(output, *args) -> None:
     Template code for testing the output of the block.
     """
     assert output is not None, 'The output is undefined'
+
+```
+
+#### The data exporter block:
+```
+from mage_ai.settings.repo import get_repo_path
+from mage_ai.io.config import ConfigFileLoader
+from mage_ai.io.google_cloud_storage import GoogleCloudStorage
+from pandas import DataFrame
+from os import path
+
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+
+@data_exporter
+def export_data_to_google_cloud_storage(df: DataFrame, **kwargs) -> None:
+    """
+    Template for exporting data to a Google Cloud Storage bucket.
+    Specify your configuration settings in 'io_config.yaml'.
+
+    Docs: https://docs.mage.ai/design/data-loading#googlecloudstorage
+    """
+    config_path = path.join(get_repo_path(), 'io_config.yaml')
+    config_profile = 'default'
+
+    bucket_name = 'mage-zoomcamp-casper-2024'
+    object_key = 'green_taxi_2020.parquet'
+
+    GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).export(
+        df,
+        bucket_name,
+        object_key,
+    )
 
 ```
 
