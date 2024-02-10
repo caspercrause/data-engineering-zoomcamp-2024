@@ -4,7 +4,7 @@
 ### SETUP:
  - Create an external table using the Green Taxi Trip Records Data for 2022.
  - Create a table in BQ using the Green Taxi Trip Records for 2022 (do not partition or cluster this table).
- - It was very unlcear but you had to get the parquet data from a website into your CGP bucket. I have included a sample mage pipeline to ingests and exports the data as a preliminary step to the questions
+ - It was very unlcear but you had to get the parquet data from a website into your CGP bucket. I have included a sample mage pipeline that ingests and exports the data as a preliminary step to the questions
 
 #### The Data Loader block:
 ```
@@ -80,7 +80,7 @@ def test_output(output, *args) -> None:
 
 ```
 
-#### The data exporter block:
+#### The Data Exporter block:
 ```
 from mage_ai.settings.repo import get_repo_path
 from mage_ai.io.config import ConfigFileLoader
@@ -115,7 +115,7 @@ def export_data_to_google_cloud_storage(df: DataFrame, **kwargs) -> None:
 ```
 
 
-I had a really hard time with bigquery not being able to recognise my data a datetime so I gave up and converted my datetime columns to dates instead
+I had a really hard time with bigquery not being able to recognise my data as datetime so I gave up and converted my datetime columns to dates instead.
 
 
 ```SQL
