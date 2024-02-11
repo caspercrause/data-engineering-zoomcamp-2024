@@ -120,11 +120,40 @@ I had a really hard time with bigquery not being able to recognise my data as da
 
 ```SQL
 -- Creating external table referring to gcs path
+-- Creating external table referring to gcs path
 CREATE OR REPLACE EXTERNAL TABLE `project-ast-292014.ny_taxi.green_taxi_data_2020_external`
+(
+  VendorID INTEGER,
+  lpep_pickup_datetime TIMESTAMP,
+  lpep_dropoff_datetime TIMESTAMP,
+  passenger_count FLOAT64,
+  trip_distance FLOAT64,
+  RatecodeID FLOAT64,
+  store_and_fwd_flag STRING,
+  PULocationID INTEGER,
+  DOLocationID INTEGER,
+  payment_type INTEGER,
+  fare_amount FLOAT64,
+  extra FLOAT64,
+  mta_tax FLOAT64,
+  tip_amount FLOAT64,
+  tolls_amount FLOAT64,
+  improvement_surcharge FLOAT64,
+  total_amount FLOAT64,
+  congestion_surcharge FLOAT64,
+  airport_fee INTEGER
+)
+
 OPTIONS (
   format = 'parquet',
   uris = ['gs://mage-zoomcamp-casper-2024/green_taxi_2020.parquet']
-);
+)
+
+
+
+;
+
+
 
 ```
 
