@@ -9,6 +9,8 @@ GitHub Code Spaces Follow-Along for the original course
 
  - [DLT Workshop Homework code](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/3a40b6d24ad6bf1c65d0c626113b3771a12b65cb/workshops_dlt_resources/homework_workshop.py)
 
+### Running a merged operation:
 [![Merge](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/3a40b6d24ad6bf1c65d0c626113b3771a12b65cb/workshops_dlt_resources/dlt-merge.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/3a40b6d24ad6bf1c65d0c626113b3771a12b65cb/workshops_dlt_resources/dlt-merge.png)
 
+### Running an append operation:
 [![Append](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/workshops_dlt_resources/dlt-append.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/workshops_dlt_resources/dlt-append.png)
