@@ -6,3 +6,9 @@ GitHub Code Spaces Follow-Along for the original course
  - [Week 2 Homework code](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/Week%202%20Homework.md)
 
  - [Week 3 Homework code](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/Week%203%20Homework.md)
+
+ - [DLT Workshop Homework code](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/3a40b6d24ad6bf1c65d0c626113b3771a12b65cb/workshops_dlt_resources/homework_workshop.py)
+
+[![Merge](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/3a40b6d24ad6bf1c65d0c626113b3771a12b65cb/workshops_dlt_resources/dlt-merge.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/3a40b6d24ad6bf1c65d0c626113b3771a12b65cb/workshops_dlt_resources/dlt-merge.png)
+
+[![Append](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/workshops_dlt_resources/dlt-append.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/workshops_dlt_resources/dlt-append.png)
