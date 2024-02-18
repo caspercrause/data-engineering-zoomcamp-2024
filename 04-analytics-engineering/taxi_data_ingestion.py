@@ -1,21 +1,26 @@
 import io
-import pandas as pd
 import requests
 import pyarrow.parquet as pq
 import itertools
 from google.cloud import bigquery # pip install google-cloud-bigquery and pyarrow as a dependency
 from google.oauth2 import service_account
+from dotenv import load_dotenv
+import os
 
-services = ["green", "yellow"]
+load_dotenv()
+
+services = ["green", "yellow", "fhv"]
 years = ["2019", "2020"]
 months = list(i for i in range(1, 13))
 
 credentials = service_account.Credentials.from_service_account_file(
-    'service_acc.json', scopes=['https://www.googleapis.com/auth/cloud-platform'],
+    os.getenv("SERVICE_ACC_CREDS_JSON"), scopes=['https://www.googleapis.com/auth/cloud-platform'],
 )
 client = bigquery.Client(project=credentials.project_id, credentials=credentials)
 
+# Set up Config for the Job, You can also fully or partially setup the schema here:
 job_config = bigquery.LoadJobConfig()
+job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
 
 
 for service, year, month in itertools.product(services, years, months):
@@ -32,13 +37,17 @@ for service, year, month in itertools.product(services, years, months):
         
         new_df = pq.read_table(data).to_pandas()
         print(f"Parquet loaded:\n{file_name}\nDataFrame shape:\n{new_df.shape}")
+        
         if service == 'green':
             table_name = 'green_tripdata'
+        
+        elif service == 'fhv':
+            table_name = 'fhv_tripdata'
+        
         else: 
             table_name = 'yellow_tripdata'
 
         table_id = '{0}.{1}.{2}'.format(credentials.project_id, "trips_data_all", table_name)
-        job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
 
         # Upload new set incrementally:
         # ! This method requires pyarrow to be installed:
