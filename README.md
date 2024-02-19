@@ -14,3 +14,5 @@ GitHub Code Spaces Follow-Along for the original course
 
 ### Running an append operation:
 [![Append](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/workshops_dlt_resources/dlt-append.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/workshops_dlt_resources/dlt-append.png)
+
+- [Week 4 Homework code](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/Week%204%20Homework.md)
