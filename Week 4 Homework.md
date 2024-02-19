@@ -9,24 +9,24 @@ The script takes about 10 minutes to run and uploaded the following to `BigQuery
 A link to that script may be found [here](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/taxi_data_ingestion.py)
 
 ## Question 1: What happens when we execute dbt build --vars '{'is_test_run':'true'}'
-Since we only define these vars in our staging the answer should be that it is applied to stagig models only and not all models 
+_Since we only define these vars in our staging the answer should be that it is applied to staging models only and not all models_
 
 ## Question2: What is the code that our CI job will run?
 
-CI job makes sure tha development and production enironments do not break with a bad merge so it checks tests the new changes proposed by the incoming pull request and only if it has passed all of the test can you then merge the pull request
+_CI job makes sure that development and production environments do not break with a bad merge so it tests the new changes proposed by the incoming pull request and only if it has passed all of the tests can you merge the pull request_
 
 [![CI Test](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/%20testing-ci.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/%20testing-ci.png)
 
-If all goes well:
+_If all goes well this is what you should see:_
 
 [![CI Passed](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/passed-ci.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/passed-ci.png)
 
 ## Question3: What is the count of records in the model fact_fhv_trips after running all dependencies with the test run variable disabled (:false)?
 
-After running code inside of dbt about `22.8` million rows were processed
+_After running code inside of dbt about `22.8` million rows were processed_
 
 ## Question 4: What is the service that had the most rides during the month of July 2019?
 
-To answer this I made a quick looker data studio dashboard report and counted the amount of records by month:
+_To answer this I made a quick looker data studio dashboard report and counted the amount of records by month:_
 
 [![CI Passed](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/looker-data-studio.png)](https://github.com/caspercrause/data-engineering-zoomcamp-2024/blob/master/04-analytics-engineering/looker-data-studio.png)
